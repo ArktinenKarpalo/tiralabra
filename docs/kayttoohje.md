@@ -5,6 +5,8 @@ Ohjelman voi suorittaa sijainnista `./build/src/tiralabra_run`
 
 Testit suoritetaan sijainnista `./build/test/test`
 
+Testikattavuuden voi tämän jälkeen tarkistaa `gcovr -r ./src/ ./build` komennolla.
+
 Huom. git submodulejen takia on syytä käyttää esim. `--recurse-submodules` argumenttia.
 
 Päivitetty 28.3.
