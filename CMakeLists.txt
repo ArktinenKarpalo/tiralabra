@@ -2,9 +2,13 @@ cmake_minimum_required(VERSION 3.10)
 
 project(tiralabra)
 
-#set(CMAKE_CXX_COMPILER /usr/bin/g++)
-set(CMAKE_CXX_FLAGS "--coverage -Wall -Wextra -O0 -g -std=c++17")
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3")
 
+OPTION(coverage "Code coverage" OFF)
+if(coverage)
+	set(CMAKE_CXX_FLAGS "-Wall -Wextra --coverage -O0 -g")
+endif()
 
 include_directories("src")
 
