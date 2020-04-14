@@ -2,12 +2,12 @@
 #include <string>
 #include <stack>
 #include "thompson.h"
-#include "ds/node.h"
+#include "ds/node_nfa.h"
 #include "ds/sub_expr.h"
 
 // Convert postfix notation regex to NFA with Thompson's construction
 // Returns start state and accepting state
-std::pair<ds::Node*, ds::Node*> Thompson::thompson_nfa(std::string expr) {
+std::pair<ds::Node_nfa*, ds::Node_nfa*> Thompson::thompson_nfa(std::string expr) {
 	// Thompson nfa from postfix
 	std::stack<ds::Sub_expr*> stk;
 	for(char cha : expr) {
@@ -55,12 +55,12 @@ std::pair<ds::Node*, ds::Node*> Thompson::thompson_nfa(std::string expr) {
 	return std::make_pair(nfa->q, nfa->f);
 }
 
-bool Thompson::matches(std::string input, int cur_ind, ds::Node *cur_node, ds::Node *accept_node) {
+bool Thompson::matches(std::string input, int cur_ind, ds::Node_nfa *cur_node, ds::Node_nfa *accept_node) {
 	if(cur_ind == input.size()) {
 		if(cur_node == accept_node)
 			return true;
 	}
-	for(std::pair<char, ds::Node*> pa : cur_node->next(input[cur_ind])) {
+	for(std::pair<char, ds::Node_nfa*> pa : cur_node->next(input[cur_ind])) {
 		if(pa.first == '?') {
 			if(matches(input, cur_ind, pa.second, accept_node))
 				return true;

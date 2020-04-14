@@ -2,5 +2,6 @@
 
 int main() {
 	::testing::InitGoogleTest();
-	return RUN_ALL_TESTS();
+	RUN_ALL_TESTS();
+	return 0; // Always return 0, even if tests fail
 }

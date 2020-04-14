@@ -1,5 +1,5 @@
 #include "preprocess.h"
-#include "ds/node.h"
+#include "ds/node_nfa.h"
 #include <string>
 #include <stack>
 

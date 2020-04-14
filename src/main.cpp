@@ -5,7 +5,7 @@
 #include <stack>
 #include <queue>
 
-#include "ds/node.h"
+#include "ds/node_nfa.h"
 #include "ds/sub_expr.h"
 #include "preprocess.h"
 #include "thompson.h"

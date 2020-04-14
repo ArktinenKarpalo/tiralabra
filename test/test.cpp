@@ -1,13 +1,14 @@
 #include "gtest/gtest.h"
-#include "ds/node.h"
+#include "ds/node_nfa.h"
 #include "matcher.h"
 
 // Test if addtrans adds some element to vector with transitions
 TEST(NodeTest, AddTransSize) {
-	ds::Node *nodeA = new ds::Node();
-	ds::Node *nodeB = new ds::Node();
+	ds::Node_nfa *nodeA = new ds::Node_nfa();
+	ds::Node_nfa *nodeB = new ds::Node_nfa();
 	nodeA->addTrans('A', nodeB);
-	EXPECT_EQ(nodeA->d.size(), 1);
+	EXPECT_EQ(nodeA->next('A').size(), 1);
+	EXPECT_EQ(nodeA->next('B').size(), 0);
 	delete nodeA;
 	delete nodeB;
 }

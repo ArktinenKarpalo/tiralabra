@@ -6,7 +6,7 @@
 bool matcher::match(std::string expr, std::string st) {
 	expr = Preprocess::add_concatenations(expr);
 	expr = Preprocess::postfix(expr);
-	std::pair<ds::Node*, ds::Node*> nfa = Thompson::thompson_nfa(expr);
+	std::pair<ds::Node_nfa*, ds::Node_nfa*> nfa = Thompson::thompson_nfa(expr);
 
 	return Thompson::matches(st, 0, nfa.first, nfa.second);
 }
