@@ -1,0 +1,4 @@
+Tällä viikolla paransin CMaken testien käsittelyä, automatisoin githubiin koodin testauksen sekä testien rivikattavuusraportin generoinnin.
+Ohjelman koodin puolella toteutin alustavan version powerset constructionista, jolla Thompsonilla generoitu NFA muutetaan DFA:ksi. Lisäsin testeihin merkittävästi kattavuutta ja parantelin jo olemassa olevan koodin rakennetta. Ensi viikolla tarkoitus on lisätä testausta ja parannella powerset constructionin tehokkuutta, sekä mitata toteutettujen algoritmien suorituskykyä, lisätä DFA tilojen minimointiin algoritmi ja korvata mahdolliset std-kirjaston tietorakenteet omilla.
+
+Aikaa käytetty noin 10h.

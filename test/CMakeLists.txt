@@ -6,4 +6,5 @@ target_link_libraries(test_all PUBLIC tiralabra_lib gtest)
 
 include(GoogleTest)
 #enable_testing()
-gtest_discover_tests(test_all)
+#gtest_discover_tests(test_all)
+add_test(test_all test_all)

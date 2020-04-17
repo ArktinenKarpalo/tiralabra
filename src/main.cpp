@@ -1,20 +1,15 @@
 #include <string>
 #include <iostream>
-#include <utility>
-#include <vector>
-#include <stack>
-#include <queue>
+#include <memory>
 
-#include "ds/node_nfa.h"
-#include "ds/sub_expr.h"
-#include "preprocess.h"
 #include "thompson.h"
-#include "matcher.h"
+#include "powerset.h"
 
 
 int main() {
 	std::string expr, st;
 	std::cin >> expr;
 	std::cin >> st;
-	std::cout << matcher::match(expr, st);
+	std::unique_ptr<Thompson> t(new Thompson(expr));
+	std::cout << t->match(st);
 }
