@@ -5,6 +5,6 @@ add_executable(test_all ${test_sources} ${test_headers})
 target_link_libraries(test_all PUBLIC tiralabra_lib gtest)
 
 include(GoogleTest)
-#enable_testing()
-#gtest_discover_tests(test_all)
-add_test(test_all test_all)
+file(COPY data DESTINATION .)
+
+add_test(test_all test_all WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})

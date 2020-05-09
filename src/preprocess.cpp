@@ -1,42 +1,49 @@
+#include <string>
+
 #include "preprocess.h"
 #include "ds/node_nfa.h"
-#include <string>
-#include <stack>
+#include "ds/stack.h"
 
 // Preprocess expression to add concatenations
-// TODO: could be merged to Shunting-yard
 std::string Preprocess::add_concatenations(std::string expr) {
 	std::string expr_c = "";
 
 	bool conc = false;
+	bool ignore_next = false;
 	for(char cha : expr) {
-		if(cha == '*') {
+		if(!ignore_next && cha == '\\') {
+			if(conc)
+				expr_c.push_back('#');
+			ignore_next = true;
 			expr_c.push_back(cha);
-		} else if(cha == '(') {
+		} else if(!ignore_next && cha == '*') {
+			expr_c.push_back(cha);
+		} else if(!ignore_next && cha == '(') {
 			if(conc)
 				expr_c.push_back('#');
 			conc = false;
 			expr_c.push_back(cha);
-		} else if(cha == ')') {
+		} else if(!ignore_next && cha == ')') {
 			expr_c.push_back(cha);
-		} else if(cha == '|') {
+		} else if(!ignore_next && cha == '|') {
 			conc = false;
 			expr_c.push_back(cha);
 		} else {
-			if(conc)
+			if(!ignore_next && conc)
 				expr_c.push_back('#');
 			expr_c.push_back(cha);
 			conc = true;
+			ignore_next = false;
 		}
 	}
+
 	return expr_c;
 }
 
 // Uses shunting-yard algorithm to convert the expression into postfix notation for easier processing
-// TODO: Support epsilon and .
 std::string Preprocess::postfix(std::string expr) {
 	std::string pf = "";
-	std::stack<char> stk2;
+	ds::stack<char> stk2;
 
 	expr = "(" + expr + ")";
 	for(int i=0; i<expr.size(); i++) {

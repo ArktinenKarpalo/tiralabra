@@ -1,17 +1,15 @@
 #include <string>
-#include <regex>
+#include <utility>
 #include "powerset.h"
 #include "gtest/gtest.h"
+#include "thompson.h"
 #include "ds/node_nfa.h"
 #include "ds/matcher.h"
-#include "thompson.h"
-#include <utility>
-
 
 // Test if addtrans adds some element to vector with transitions
 TEST(NodeTest, AddTransSize) {
-	ds::Node_nfa *nodeA = new ds::Node_nfa();
-	ds::Node_nfa *nodeB = new ds::Node_nfa();
+	ds::Node_nfa *nodeA = new ds::Node_nfa(1);
+	ds::Node_nfa *nodeB = new ds::Node_nfa(2);
 	nodeA->addTrans('A', nodeB);
 	EXPECT_EQ(nodeA->next('A').size(), 1);
 	EXPECT_EQ(nodeA->next('B').size(), 0);
@@ -19,7 +17,7 @@ TEST(NodeTest, AddTransSize) {
 	delete nodeB;
 }
 
-// Test some basic operations TODO: test with generated inputs from a file
+// Test some basic operations
 void test_inputs(std::pair<std::string, bool> inputs[], int n, Matcher *m) {
 	for(int i=0; i<n; i++) {
 		if(inputs[i].second) {
@@ -80,59 +78,4 @@ TEST(MatcherTest_NFA_or, 4) {
 		};
 	test_inputs(inputs, sizeof(inputs)/sizeof(inputs[0]), t);
 	delete t;
-}
-
-// Test all combinations of letters ABCD between length 1 and 10
-void testall(std::regex *reg, Matcher *matcher, std::string *s) {
-	if(s->size() == 10) {
-		return;
-	}
-	for(int i='A'; i<='D'; i++) {
-		s->push_back(i);
-		if(std::regex_match(*s, *reg)) {
-			ASSERT_TRUE(matcher->match(*s)) << " with string: " <<  *s;
-			
-		} else {
-			ASSERT_FALSE(matcher->match(*s)) << " with string: " << *s;
-		}
-		testall(reg, matcher, s);
-		s->pop_back();
-	}
-}
-
-TEST(MatcherTest_NFA_many_1, 5) {
-	std::string expr = "A(B|C)*((A|B)|(C|D))E*ABC|F";
-	Thompson *t = new Thompson(expr);
-	std::string s = "";
-	std::regex reg(expr);
-	testall(&reg, t, &s);
-	delete t;
-}
-
-
-TEST(MatcherTest_NDFA_many_1, 6) {
-	std::string expr = "A(B|C)*((A|B)|(C|D))E*ABC|F";
-	Powerset *ps = new Powerset(expr);
-	std::string s = "";
-	std::regex reg(expr);
-	testall(&reg, ps, &s);
-	delete ps;
-}
-
-TEST(MatcherTest_NFA_many_2, 7) {
-	std::string expr = "A*B*C*|C*B*A*";
-	Thompson *t = new Thompson(expr);
-	std::string s = "";
-	std::regex reg(expr);
-	testall(&reg, t, &s);
-	delete t;
-}
-
-TEST(MatcherTest_DFA_many_2, 8) {
-	std::string expr = "A*B*C*|C*B*A*";
-	Powerset *ps = new Powerset(expr);
-	std::string s = "";
-	std::regex reg(expr);
-	testall(&reg, ps, &s);
-	delete ps;
 }

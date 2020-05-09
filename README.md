@@ -5,3 +5,7 @@
 [Käyttöohje](https://github.com/ArktinenKarpalo/tiralabra/blob/master/docs/kayttoohje.md)
 
 [Määrittelydokumentti](https://github.com/ArktinenKarpalo/tiralabra/blob/master/docs/maarittely.md)
+
+[Toteutusdokumentti](https://github.com/ArktinenKarpalo/tiralabra/blob/master/docs/toteutus.md)
+
+[Testausdokumentti](https://github.com/ArktinenKarpalo/tiralabra/blob/master/docs/testaus.md)

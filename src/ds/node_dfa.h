@@ -1,6 +1,5 @@
 #pragma once
 #include "node_nfa.h"
-#include <vector>
 
 namespace ds {
 	class Node_dfa {

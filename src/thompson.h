@@ -1,9 +1,9 @@
 #pragma once
 #include <string>
-#include <set>
 
 #include "ds/node_nfa.h"
 #include "ds/matcher.h"
+#include "ds/vector.h"
 
 class Thompson : public Matcher {
 	public:
@@ -12,8 +12,9 @@ class Thompson : public Matcher {
 		~Thompson();
 		bool match(std::string);
 	private:
+		ds::vector<ds::Node_nfa*> nodes;
 		void thompson_nfa(std::string);
-		bool matches(std::string, int, ds::Node_nfa*);
+		bool matches(std::string, int, ds::Node_nfa*, bool*);
 		void delete_nodes_rec(ds::Node_nfa*);
-		std::set<ds::Node_nfa*> deleted_nodes;
+		int *visited;
 };

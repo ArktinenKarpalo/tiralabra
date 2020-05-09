@@ -7,9 +7,6 @@ namespace ds {
 	public:
 		ds::Node_nfa *q, *f;
 
-		Sub_expr() : q(new ds::Node_nfa()), f(new ds::Node_nfa()) {
-		}
-
 		Sub_expr(ds::Node_nfa *q, ds::Node_nfa *f) : q(q), f(f) {
 		}
 	};
