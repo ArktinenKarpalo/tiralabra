@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-18.04
 
     steps:
@@ -18,12 +17,15 @@ jobs:
     - name: prepare build dir
       run: mkdir -p build/
     - name: cmake
+      env:
+        CXX: g++-9
+        CC: gcc-9
       run: cmake .. -Dcoverage=ON
       working-directory: build/
     - name: make
       run: make test_all
       working-directory: build/
     - name: run tests
-      run: ./test/test_all
-      working-directory: build/
+      run: ./test_all
+      working-directory: build/test
     - uses: codecov/codecov-action@v1
